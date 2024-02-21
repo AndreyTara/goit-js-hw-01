@@ -13,7 +13,7 @@ function isNumber(item) {
   // Якщо тип не є числом, виводимо повідомлення про помилку в консоль
   if (!isNum) {
     console.error(
-      `Значення змінної ${item} типу "${typeof item}" не відповідає типу "${expectedType}"`
+      `Invalid value for ${item}: expected type "${expectedType}", got "${typeof item}".`
     );
   }
 
@@ -30,16 +30,20 @@ function isNumber(item) {
  */
 
 function makeTransaction(quantity, pricePerDroid) {
+  // Проведення валыдації зміниих
   if (!isNumber(quantity) || !isNumber(pricePerDroid)) {
-    return `value "quantity = ${quantity}" or "pricePerDroid= ${pricePerDroid}" not valid`;
+    console.error(
+      `The values "quantity = ${quantity}" or "pricePerDroid= ${pricePerDroid}" are not valid.`
+    );
+    return;
   }
   // Розраховуємо загальну вартість замовлення
-  const totalCoast = quantity * pricePerDroid;
+  const totalCost = quantity * pricePerDroid;
   // Генеруємо повідомлення про замовлення
-  return `You ordered ${quantity} droids worth ${totalCoast} credits!`;
+  return `"You ordered ${quantity} droids worth ${totalCost} credits!"`;
 }
 // Виводимо результати викликів функції з різними параметрами
 console.log("Повертання результату функції: Задача 1. Замовлення дроїдів ");
-console.log(makeTransaction(5, 3000));
-console.log(makeTransaction(3, 1000));
-console.log(makeTransaction(10, 500));
+console.log(makeTransaction(5, 3000)); //"You ordered 5 droids worth 15000 credits!"
+console.log(makeTransaction(3, 1000)); //"You ordered 3 droids worth 3000 credits!"
+console.log(makeTransaction(10, 500)); //"You ordered 10 droids worth 5000 credits!"

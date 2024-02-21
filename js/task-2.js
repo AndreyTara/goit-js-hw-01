@@ -11,9 +11,10 @@ function isString(item) {
   const isStr = typeof item === expectedType;
 
   // Якщо тип не є рядком, виводимо повідомлення про помилку в консоль
+  // `Значення змінної ${item} типу "${typeof item}" не відповідає типу "${expectedType}"`
   if (!isStr) {
     console.error(
-      `Значення змінної ${item} типу "${typeof item}" не відповідає типу "${expectedType}"`
+      `Invalid value for ${item}: expected type "${expectedType}", got "${typeof item}"`
     );
   }
 
@@ -35,7 +36,7 @@ function isNumber(item) {
   // Якщо тип не є числом, виводимо повідомлення про помилку в консоль
   if (!isNum) {
     console.error(
-      `Значення змінної ${item} типу "${typeof item}" не відповідає типу "${expectedType}"`
+      `Invalid value for ${item}: expected type "${expectedType}", got "${typeof item}"`
     );
   }
 
@@ -55,24 +56,22 @@ function isNumber(item) {
 function getShippingMessage(country, price, deliveryFee) {
   if (!isNumber(price) || !isNumber(deliveryFee)) {
     // Генеруємо повідомлення з валідації змнної price та deliveryFee
-    return `value "price = ${price}" or "deliveryFee= ${deliveryFee}" not valid`;
+    console.error(
+      `The values "price = ${price}" or "deliveryFee= ${deliveryFee}" are not valid`
+    );
+    return;
   }
 
-  if (!isString(country))
+  if (!isString(country)) {
     // Генеруємо повідомлення з валідації змнної назви країни
-    return `value "country = ${country}" not valid.`;
+    console.error(`The value "country = ${country}" is not valid.`);
+    return;
+  }
+  const totalPrice = price + deliveryFee;
+  return `"Shipping to ${country} will cost ${totalPrice} credits"`;
 }
 // Виводимо результати викликів функції з різними параметрами
 console.log("Повертання результату функції: Задача 2. Доставка товару ");
-console.log(
-  `Виклик getShippingMessage("Australia", 120, 50) повертає`,
-  getShippingMessage("Australia", 120, 50)
-);
-console.log(
-  `Виклик  getShippingMessage("Germany", 80, 20) повертає`,
-  getShippingMessage("Germany", 80, 20)
-);
-console.log(
-  `Виклик  getShippingMessage("Sweden", 100, 20) повертає`,
-  getShippingMessage("Sweden", 100, 20)
-);
+console.log(getShippingMessage("Australia", 120, 10)); //"Shipping to Australia will cost 170 credits"
+console.log(getShippingMessage("Germany", 80, 20)); //"Shipping to Germany will cost 100 credits"
+console.log(getShippingMessage("Sweden", 100, 20)); //"Shipping to Sweden will cost 120 credits"

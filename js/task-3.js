@@ -37,7 +37,7 @@ function getElementWidth(content, padding, border) {
     let inputString = objInput[key];
     let isValidNumber = pxRegex.test(inputString);
     if (!isValidNumber) {
-      console.log(key, objInput[key], "- not valid value");
+      console.error(key, objInput[key], "- not valid value");
       return;
     }
   }
@@ -55,15 +55,6 @@ function getElementWidth(content, padding, border) {
 
 // Виводимо результати викликів функції з різними параметрами
 console.log("Повертання результату функції: Задача 3. Ширина елемента ");
-console.log(
-  `Виклик getElementWidth("50px", "8px", "4px") повертає`,
-  getElementWidth("50px", "8px", "4px")
-);
-console.log(
-  `Виклик getElementWidth("60px", "12px", "8.5px") повертає `,
-  getElementWidth("60px", "12px", "8.5px")
-);
-console.log(
-  `Виклик getElementWidth("200px", "0px", "0px") повертає`,
-  getElementWidth("200px", "0px", "0px")
-);
+console.log(getElementWidth("50px", "8px", "4px")); //74
+console.log(getElementWidth("60px", "12px", "8.5px")); //101
+console.log(getElementWidth("200px", "0px", "0px")); //200
